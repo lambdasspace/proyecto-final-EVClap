@@ -18,6 +18,7 @@ The input file is layed out in a grid. Every element in the grid is `1`, `0` or 
 - `1` means the fluid is flowing away from this point. 
 - `0` means the fluid is not moving at this point. 
 - `w` represents a wall. 
+
 Valid examples files can be viewed as `.txt` docs in the `Examples` file.
 
 ## Settings
