@@ -1,5 +1,8 @@
 # **FINAL PROYECT**
 ## Liquid simulator in closed and controlled spaces with `Haskell`
+
+Based in the Lattice Boltzmann Method (LBM)
+
 ### *PROGRAMACIÓN DECLARATIVA 2023-2*      
 - Emilio Velázquez Calderón
 
