@@ -35,20 +35,21 @@ mkAnim attName beg dur val = "<animate attributeName='"++attName++
 
 -- Function to draw the fluid
 drawFluid :: (Float, Float) -> -- ^Size of a cell, width then height
- Float -> -- ^Duration in seconds
- FluidMatrixTime Fluid Wall -> -- ^Fluid matrix to animate
- String
+            Float ->          -- ^Duration in seconds
+            FluidMatrixTime Fluid Wall ->  -- ^Fluid matrix to animate
+            String
 drawFluid _ _ (FluidMatrixTime [] _ _ ) = ""
 drawFluid (w, h) dur (FluidMatrixTime state fluid wall) =
- concat [
- rec row col (getCol row col)
- (mkAnim "opacity" 0 dur (getPre(extractAt state row col)))
- | col <- [0..((length (state!!0!!0))-1)], row <- [0..((length (state!!0))-1)] ]
- where rec row col = mkRect (fromIntegral(col)*w, fromIntegral(row)*h) (w,h)
- getPre = map (\x -> x/maxPressure) . map getPressure
- getCol row col = case state!!0!!row!!col of
- FluidElem _ -> getFluidColor fluid
- WallElem -> getWallColor wall
+        concat [
+          rec row col (getCol row col)
+          (mkAnim "opacity" 0 dur (getPre(extractAt state row col)))
+        | col <- [0..((length (state!!0!!0))-1)], row <- [0..((length (state!!0))-1)] ]
+        where rec row col = mkRect (fromIntegral(col)*w, fromIntegral(row)*h) (w,h)
+--              extractAt state row col = [((state!!time)!!row)!!col | time <-[0..((length state)-1)]]
+              getPre = map (\x -> x/maxPressure) . map getPressure
+              getCol row col = case state!!0!!row!!col of
+                                   FluidElem _ -> getFluidColor fluid
+                                   WallElem -> getWallColor wall
 
 -- Function to extract a specific row and column from a list of FluidMatrix
 extractAt :: [FluidMatrix] -> Int -> Int -> [GridElem]
